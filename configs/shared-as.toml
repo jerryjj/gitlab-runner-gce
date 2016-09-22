@@ -1,0 +1,35 @@
+concurrent = 5
+check_interval = 0
+
+[[runners]]
+  url = "GITLAB_CI_URI"
+  name = "RUNNER_NAME"
+  token = "RUNNER_TOKEN"
+  executor = "docker+machine"
+  limit = 10
+  [runners.docker]
+    image = "node:6"
+    disable_cache = false
+    cache_dir = "/cache"
+    volumes = ["/cache"]
+  [runners.machine]
+    IdleCount = 1
+    IdleTime = 3600
+    MaxBuilds = 10
+    MachineDriver = "google"
+    MachineName = "ci-as-w-%s"
+    MachineOptions = [
+      "google-project=PROJECT_ID",
+      "google-zone=ZONE",
+      "google-machine-type=g1-small",
+      "google-machine-image=https://www.googleapis.com/compute/v1/projects/coreos-cloud/global/images/coreos-stable-1122-2-0-v20160906",
+      "google-tags=gitlab-ci-runner-worker,project-noip",
+      "google-preemptible=true",
+      "google-use-internal-ip=true",
+      "google-use-internal-ip-only=true"
+    ]
+  [runners.cache]
+    Type = "s3"
+    ServerAddress = "YOUR-GCS-CACHE_BUCKET_NAME.storage.googleapis.com"
+    AccessKey = "YOUR-GCS-ACCESS_KEY"
+    SecretKey = "YOUR-GCS-SECRET_KEY"
