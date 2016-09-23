@@ -10,6 +10,13 @@ This repo contains a simple example setup of setting up an auto-scaling [Gitlab 
 We will setup a Runner using "docker+machine" -executor that runs in very minimalistic idle costs (~ $20USD/month).
 We will also try to use Google Cloud Storage as the Runners cache.
 
+In a nutshell this setup will do the following:
+
+ 1. Setup a NAT-gateway in the GCP project for the workers to use
+ 2. Setup a g1-small instance to act as a Gitlab Runner
+ 3. Register this runner to your Gitlab instance
+ 4. Configure Docker Machine to spin up g1-small [Preemptible VMs](https://cloud.google.com/preemptible-vms/) as the workers.
+
 ## Preparations
 
 First of all, you should have a Google Cloud -project setup with billing and Compute Engine enabled.
