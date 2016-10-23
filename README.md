@@ -99,7 +99,7 @@ It might be that your project already have these setup (in that case, you can ju
 
 ```sh
 gcloud compute firewall-rules create allow-http --project $PROJECT_ID \
---target-tags http-server --allow tcp:tcp80
+--target-tags http-server --allow tcp:80
 
 gcloud compute firewall-rules create allow-https --project $PROJECT_ID \
 --target-tags https-server --allow tcp:443
